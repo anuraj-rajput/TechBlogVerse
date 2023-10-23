@@ -2,7 +2,7 @@ import configurations from '../conf/config'
 
 import { Client, ID, Databases, Storage, Query } from 'appwrite';
 
-export class Service2 {
+export class Service {
     client = new Client()
     databases;
     bucket;
@@ -15,9 +15,9 @@ export class Service2 {
         
         this.databases = new Databases(this.client);
         this.bucket = new Storage(this.client);
-     
     }
-    async createPost(title, slug, content, featuredImage, status, userID) {
+
+    async createPost(title, slug, content, featuredImage, status, userId) {
         try {
             return await this.databases.createDocument(
                 configurations.appwriteDatabaseId,
@@ -28,7 +28,7 @@ export class Service2 {
                     content,
                     featuredImage,
                     status,
-                    userID,
+                    userId,
                 }
             )
         } catch (error) {
@@ -137,5 +137,5 @@ export class Service2 {
 
 
 
-const service = new Service2()
+const service = new Service()
 export default service

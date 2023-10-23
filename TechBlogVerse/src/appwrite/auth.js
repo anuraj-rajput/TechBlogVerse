@@ -18,7 +18,6 @@ export class AuthService{
         try {
             const userAccount = await this.account.create(ID.unique(), email, password, name);
             if (userAccount) {
-                //call another method
                 return this.login(email, password)
             } else {
                 return userAccount
@@ -52,7 +51,7 @@ export class AuthService{
             return await this.account.deleteSessions();
                     
         } catch (error) {
-            throw error
+            tconsole.log("Appwrite serive :: logout :: error", error);
             
         }
     }
