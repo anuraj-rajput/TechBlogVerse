@@ -4,8 +4,7 @@ import {Login as LoginComp} from '../components'
 function Login() {
     return (
         <div className='py-8'>
-            <LoginComp/>
-            
+            <LoginComp/>            
         </div>
         
     )

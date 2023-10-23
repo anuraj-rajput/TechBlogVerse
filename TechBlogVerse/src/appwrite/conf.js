@@ -3,12 +3,11 @@ import configurations from '../conf/config'
 import { Client, ID, Databases, Storage, Query } from 'appwrite';
 
 export class Service {
-    client = new Client()
+    client = new Client();
     databases;
     bucket;
-
-    constructor() {
-
+    
+    constructor(){
         this.client
             .setEndpoint(configurations.appwriteUrl)
             .setProject(configurations.appwriteProjectId);
@@ -17,12 +16,12 @@ export class Service {
         this.bucket = new Storage(this.client);
     }
 
-    async createPost(title, slug, content, featuredImage, status, userId) {
+     async createPost({title, slug, content, featuredImage, status, userId}){
         try {
             return await this.databases.createDocument(
                 configurations.appwriteDatabaseId,
                 configurations.appwriteCollectionId,
-                slug,//this is unique gor every blog
+                slug,
                 {
                     title,
                     content,
@@ -32,7 +31,7 @@ export class Service {
                 }
             )
         } catch (error) {
-            console.log("Appwrite service::createPost::error",error)
+            console.log("Appwrite serive :: createPost :: error", error);
         }
     }
 
@@ -51,7 +50,7 @@ export class Service {
 
             )
         } catch (error) {
-            console.log("Appwrite service::updatePost::error",error)
+            console.log("Appwrite service:: updatePost:: error ",error)
         }
     
     }
@@ -65,8 +64,7 @@ export class Service {
             return true;
         } catch (error) {
             console.log("Appwrite service::deletePost::error",error)
-            return false;
-                        
+            return false;        
         }        
     }
 
@@ -94,7 +92,8 @@ export class Service {
         
             
         } catch (error) {
-            console.log("Appwrite service::getPosts::error",error)
+            console.log("Appwrite service::getPosts::error", error)
+            return false
         }
     }
 
